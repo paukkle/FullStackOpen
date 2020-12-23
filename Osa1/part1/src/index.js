@@ -5,14 +5,14 @@ import ReactDOM from 'react-dom';
 const Hello = ({name, age}) => {  //tiedonvälitys propsin avulla, props muutetaan suoraan muuttujiksi
   const bornYear = () => new Date().getFullYear() - age
   
-  return <di>
+  return <div>
     <p>
       Hello {name}, you are {age} years old
     </p>
     <p>
       You were born in {bornYear()}
     </p>
-  </di>
+  </div>
 }
 
 const Footer = () => {
@@ -29,15 +29,18 @@ const App = (props) => {
   const [counter, setCounter] = useState(0)
   const nimi = "Kärki"
   const ika = 87
-  
-  setTimeout(
-    () => setCounter(counter + 1), // Selain jatkaa kutsumista viiveen välein
-    1000
-  )
-    console.log("Renderöi...", counter)
+
+  console.log("Renderöi...", counter)
+
   return ( //Alla tyhjä juurielementti <>
     <>
       <h1>Greetings, {counter}</h1>
+      <button onClick={() => setCounter(counter + 1)}>
+        plus
+      </button>
+      <button onClick={() => setCounter(0)}>
+        zero
+      </button>
       <Hello name="Arvo" age={22 - 4}/>
       <Hello name={nimi} age={ika}/>
       <Footer />
