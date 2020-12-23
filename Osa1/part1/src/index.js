@@ -1,7 +1,19 @@
 import React, {useState} from 'react';
 import ReactDOM from 'react-dom';
 
+const Display = (props) => {
+  return (
+    <div>{props.counter}</div>
+  )
+}
 
+const Button = (props) => {
+  return (
+    <button onClick={props.handleClick}>
+      {props.text}
+    </button>
+  )
+}
 const Hello = ({name, age}) => {  //tiedonvälitys propsin avulla, props muutetaan suoraan muuttujiksi
   const bornYear = () => new Date().getFullYear() - age
   
@@ -25,22 +37,36 @@ const Footer = () => {
   )
 }
 
+
+
 const App = (props) => {
   const [counter, setCounter] = useState(0)
   const nimi = "Kärki"
   const ika = 87
 
+  const increaseByOne = () => setCounter(counter + 1)
+  const decreaseByOne = () => setCounter(counter - 1)
+  const setToZero = () => setCounter(0)
+
   console.log("Renderöi...", counter)
 
-  return ( //Alla tyhjä juurielementti <>
+  return ( //Alla tyhjä juurielementti <> // Tapahtumankäsitteljä
     <>
-      <h1>Greetings, {counter}</h1>
-      <button onClick={() => setCounter(counter + 1)}>
-        plus
-      </button>
-      <button onClick={() => setCounter(0)}>
-        zero
-      </button>
+      <h1>Greetings
+        <Display counter={counter} />
+      </h1>
+      <Button
+        handleClick={increaseByOne}
+        text='plus'
+      />
+      <Button
+        handleClick={setToZero}
+        text="zero"
+      />
+      <Button
+        handleClick={decreaseByOne}
+        text="minus"
+      />
       <Hello name="Arvo" age={22 - 4}/>
       <Hello name={nimi} age={ika}/>
       <Footer />
