@@ -15,16 +15,6 @@ const Button = ({ handleClick, text }) => {
   )
 }
 
-const ShowState = (props) => {
-  return (
-    <div>
-      <p>
-        {props.text} {props.state}
-      </p>
-    </div>
-  )
-}
-
 const CountAll = (states) => states.reduce((a, b) => a + b, 0)
 
 const CountAve = (states) => {
@@ -48,6 +38,16 @@ const Positives = (states) => {
   }
 }
 
+const StatisticLine = (props) => {
+  return (
+    <div>
+      <p>
+        {props.text} {props.value}
+      </p>
+    </div>
+  )
+}
+
 const Statistics = ({ states }) => {
   if (CountAll(states) === 0) {
     return (
@@ -57,18 +57,12 @@ const Statistics = ({ states }) => {
   else {
     return (
       <div>
-        <ShowState text={"good"} state={states[0]} />
-        <ShowState text={"neutral"} state={states[1]} />
-        <ShowState text={"bad"} state={states[2]} />
-        <p>
-          all {CountAll(states)}
-        </p>
-        <p>
-          average {CountAve(states)}
-        </p>
-        <p>
-          positive {Positives(states)} %
-        </p>
+        <StatisticLine text={"good"} value={states[0]} />
+        <StatisticLine text={"neutral"} value={states[1]} />
+        <StatisticLine text={"bad"} value={states[2]} />
+        <StatisticLine text={"all"} value={CountAll(states)} />
+        <StatisticLine text={"average"} value={CountAve(states)} />
+        <StatisticLine text={"positive"} value={Positives(states)} />
       </div>
     )
   }
