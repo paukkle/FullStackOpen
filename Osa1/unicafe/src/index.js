@@ -24,9 +24,11 @@ const CountAve = (states) => {
     return 0
   }
   else {
-    return revSum / len
+    return RoundToOne(revSum / len)
   }
 }
+
+const RoundToOne = (number) => Math.round(number * 10) / 10
 
 const Positives = (states) => {
   const len = CountAll(states)
@@ -34,17 +36,17 @@ const Positives = (states) => {
     return 0
   }
   else {
-    return 100 * (states[0] / len)
+    return RoundToOne(100 * (states[0] / len))
   }
 }
 
 const StatisticLine = (props) => {
   return (
-    <div>
-      <p>
-        {props.text} {props.value}
-      </p>
-    </div>
+    <tr>
+      <td>{props.text}</td>
+      <td>{props.value}</td>
+      <td>{props.add}</td>
+    </tr>
   )
 }
 
@@ -57,12 +59,16 @@ const Statistics = ({ states }) => {
   else {
     return (
       <div>
-        <StatisticLine text={"good"} value={states[0]} />
-        <StatisticLine text={"neutral"} value={states[1]} />
-        <StatisticLine text={"bad"} value={states[2]} />
-        <StatisticLine text={"all"} value={CountAll(states)} />
-        <StatisticLine text={"average"} value={CountAve(states)} />
-        <StatisticLine text={"positive"} value={Positives(states)} />
+        <table>
+          <tbody>
+            <StatisticLine text={"good"} value={states[0]} />
+            <StatisticLine text={"neutral"} value={states[1]} />
+            <StatisticLine text={"bad"} value={states[2]} />
+            <StatisticLine text={"all"} value={CountAll(states)} />
+            <StatisticLine text={"average"} value={CountAve(states)} />
+            <StatisticLine text={"positive"} value={Positives(states)} add={"%"}/>
+          </tbody>
+        </table>
       </div>
     )
   }
