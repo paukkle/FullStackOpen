@@ -1,17 +1,55 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+import React, { useState } from 'react'
+import ReactDOM from 'react-dom'
 
-ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
+const Header = ({ text }) => {
+  return (
+    <div>
+      <h1>{text}</h1>
+    </div>
+  )
+}
+
+const Button = ({ handleClick, text }) => {
+  return (
+    <button onClick={handleClick}>{text}</button>
+  )
+}
+
+const ShowState = (props) => {
+  return (
+    <div>
+      <p>
+        {props.text} {props.state}
+      </p>
+    </div>
+  )
+}
+
+const App = () => {
+  // tallenna napit omaan tilaansa
+  const [good, setGood] = useState(0)
+  const [neutral, setNeutral] = useState(0)
+  const [bad, setBad] = useState(0)
+
+  const increaseByOne = ( setFun, state ) => {
+    setFun(state + 1)
+  }
+
+
+  return (
+    <div>
+      <Header text={"give feedback"} />
+      <Button handleClick={() => increaseByOne(setGood, good)} text={"good"} />
+      <Button handleClick={() => increaseByOne(setNeutral, neutral)} text={"neutral"} />
+      <Button handleClick={() => increaseByOne(setBad, bad)} text={"bad"} />
+      <Header text={"statistics"} />
+      <ShowState text={"good"} state={good} />
+      <ShowState text={"neutral"} state={neutral} />
+      <ShowState text={"bad"} state={bad} />
+    </div>
+  )
+}
+
+ReactDOM.render(<App />, 
   document.getElementById('root')
-);
-
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
+)
