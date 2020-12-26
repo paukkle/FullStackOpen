@@ -48,6 +48,22 @@ const Positives = (states) => {
   }
 }
 
+const Statistics = ({ states }) => {
+  return (
+    <div>
+      <p>
+        all {CountAll(states)}
+      </p>
+      <p>
+        average {CountAve(states)}
+      </p>
+      <p>
+        positive {Positives(states)} %
+      </p>
+    </div>
+  )
+}
+
 const App = () => {
   // tallenna napit omaan tilaansa
   const [good, setGood] = useState(0)
@@ -71,15 +87,7 @@ const App = () => {
       <ShowState text={"good"} state={good} />
       <ShowState text={"neutral"} state={neutral} />
       <ShowState text={"bad"} state={bad} />
-      <p>
-        all {CountAll(states)}
-      </p>
-      <p>
-        average {CountAve(states)}
-      </p>
-      <p>
-        positive {Positives(states)} %
-      </p>
+      <Statistics states={states} />
     </div>
   )
 }
