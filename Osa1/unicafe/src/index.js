@@ -49,19 +49,29 @@ const Positives = (states) => {
 }
 
 const Statistics = ({ states }) => {
-  return (
-    <div>
-      <p>
-        all {CountAll(states)}
-      </p>
-      <p>
-        average {CountAve(states)}
-      </p>
-      <p>
-        positive {Positives(states)} %
-      </p>
-    </div>
-  )
+  if (CountAll(states) === 0) {
+    return (
+      <div>No feedback given</div>
+    )
+  }
+  else {
+    return (
+      <div>
+        <ShowState text={"good"} state={states[0]} />
+        <ShowState text={"neutral"} state={states[1]} />
+        <ShowState text={"bad"} state={states[2]} />
+        <p>
+          all {CountAll(states)}
+        </p>
+        <p>
+          average {CountAve(states)}
+        </p>
+        <p>
+          positive {Positives(states)} %
+        </p>
+      </div>
+    )
+  }
 }
 
 const App = () => {
@@ -84,9 +94,6 @@ const App = () => {
       <Button handleClick={() => increaseByOne(setNeutral, neutral)} text={"neutral"} />
       <Button handleClick={() => increaseByOne(setBad, bad)} text={"bad"} />
       <Header text={"statistics"} />
-      <ShowState text={"good"} state={good} />
-      <ShowState text={"neutral"} state={neutral} />
-      <ShowState text={"bad"} state={bad} />
       <Statistics states={states} />
     </div>
   )
