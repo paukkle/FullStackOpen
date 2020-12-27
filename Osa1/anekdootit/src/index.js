@@ -46,7 +46,6 @@ const App = ( props ) => {
       <ShowVotes points={points} selected={selected} />
       <Button handleClick={handlePoints} text={"vote"} />
       <Button handleClick={() => handleSet(props.anecdotes)} text={"next anecdote"}/>
-      {console.log(points)}
     </div>
   )
 }
