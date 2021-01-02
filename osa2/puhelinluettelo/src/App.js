@@ -5,7 +5,15 @@ const Persons = ({ persons, nameFilter} ) => {
   if (nameFilter !== '') {
     persons = persons.filter(person => person.name.toLowerCase().includes(nameFilter.toLowerCase()))
   }
-  return persons.map(person => <div>{person.name} {person.number}</div>)
+  return persons.map(person => <Person key={person.name} person={person}/>)
+}
+
+const Person = ({ person }) => {
+  return (
+    <div>
+      {person.name} {person.number}
+    </div>
+  )
 }
 
 const Filter = ({ handleFilter, newFilter}) => {
