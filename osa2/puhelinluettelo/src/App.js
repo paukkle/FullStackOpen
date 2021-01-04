@@ -8,13 +8,7 @@ const Persons = ({ persons, nameFilter} ) => {
   return persons.map(person => <Person key={person.name} person={person}/>)
 }
 
-const Person = ({ person }) => {
-  return (
-    <div>
-      {person.name} {person.number}
-    </div>
-  )
-}
+const Person = ({ person }) => <div>{person.name} {person.number}</div>
 
 const Filter = ({ handleFilter, newFilter}) => {
   return (
@@ -83,10 +77,10 @@ const App = () => {
     <div>
       <h2>Phonebook</h2>
       <Filter newFilter={newFilter} handleFilter={handleFilter} />
-      <h2>add a new</h2>
+      <h3>add new</h3>
       <PersonForm addName={addName} newName={newName} handleSetNewName={handleSetNewName}
         newNumber={newNumber} handleSetNewNumber={handleSetNewNumber}/>
-      <h2>Numbers</h2>
+      <h3>Numbers</h3>
       <Persons persons={persons} nameFilter={newFilter} />
     </div>
   )
